@@ -8,7 +8,7 @@
 <div class="container" id="main-content">
     <div class="row">
         <div class="col-6 no-padding">
-            <form class="form-inline" action="#" th:action="@{/contact/search}" method="get">
+            <form class="form-inline" action="#" th:action="@{/search}" method="get">
                 <input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by name ..." />
                 <button class="btn btn-primary" type="submit">
                     <i class="fa fa-search"></i> Search
@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-6 no-padding">
-            <a href="#" class="btn btn-success float-right">
+            <a href="#" th:href="@{/add}" class="btn btn-success float-right">
                 <i class="fa fa-plus-square"></i> New contact
             </a>
         </div>
@@ -34,7 +34,7 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
-                        <th>#</th>
+                        <th></th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -58,7 +58,6 @@
         </th:block>
     </div>
 </div><!-- /.container -->
-
 <footer th:replace="layout :: footer"></footer>
 
 </body>
