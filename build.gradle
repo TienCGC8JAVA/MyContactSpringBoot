@@ -18,7 +18,7 @@ dependencies {
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.1.3.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-maven-plugin', version: '2.1.3.RELEASE'
-    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.7.RELEASE', ext: 'pom'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-parent', version: '2.1.3.RELEASE', ext: 'pom'
 
     testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.1.3.RELEASE'
 }

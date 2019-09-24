@@ -8,8 +8,8 @@
 <div class="container" id="main-content">
     <div class="row">
         <div class="col-6 no-padding">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search by name ..." />
+            <form class="form-inline" action="#" th:action="@{/contact/search}" method="get">
+                <input class="form-control mr-sm-2" type="search" name="term" placeholder="Search by name ..." />
                 <button class="btn btn-primary" type="submit">
                     <i class="fa fa-search"></i> Search
                 </button>
@@ -24,52 +24,38 @@
     </div>
 
     <div class="row mt-4">
-        <div class="table-responsive">
-            <h5>List of contacts</h5>
-            <table class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Ashina Yuen</td>
-                    <td>ashinayuen@gmail.com</td>
-                    <td>0123456789</td>
-                    <td>
-                        <a href="#" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="text-danger"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Ashina Yuen</td>
-                    <td>ashinayuen@gmail.com</td>
-                    <td>0123456789</td>
-                    <td>
-                        <a href="#" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="text-danger"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Ashina Yuen</td>
-                    <td>ashinayuen@gmail.com</td>
-                    <td>0123456789</td>
-                    <td>
-                        <a href="#" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="text-danger"><i class="fa fa-trash"></i></a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <th:block th:if="${#lists.isEmpty(contacts)}">
+            <h5>No contacts</h5>
+        </th:block>
+
+        <th:block th:unless="${#lists.isEmpty(contacts)}">
+            <div class="table-responsive">
+                <h5>List of contacts</h5>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="contact,iterStat : ${contacts}">
+                        <th scope="row" th:text="${iterStat.count}"></th>
+                        <td th:text="${contact.name}"></td>
+                        <td th:text="${contact.email}"></td>
+                        <td th:text="${contact.phone}"></td>
+                        <td>
+                            <a href="#" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
+                            <a href="#" class="text-danger"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </th:block>
     </div>
 </div><!-- /.container -->
 
