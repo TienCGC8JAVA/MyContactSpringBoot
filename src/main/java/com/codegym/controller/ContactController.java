@@ -8,9 +8,11 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -42,12 +44,25 @@ public class ContactController {
   }
 
   @PostMapping("/save")
-  public ModelAndView save(@Valid Contact contact, BindingResult result, ModelAndView modelAndView) {
+  public String save(@Valid Contact contact, BindingResult result, RedirectAttributes redirect) {
     if (result.hasErrors()) {
-      modelAndView.setViewName("form");
+      return "form";
     }
     contactService.save(contact);
-    modelAndView.addObject("successMessage", "Saved contact successfully!");
-    return modelAndView;
+    redirect.addFlashAttribute("successMessage", "Saved contact successfully!");
+    return "redirect:/";
+  }
+
+  @GetMapping("/{id}/edit")
+  public String edit(@PathVariable("id") int id, Model model) {
+    model.addAttribute("contact", contactService.findById(id));
+    return "form";
+  }
+
+  @GetMapping("/{id}/delete")
+  public String delete(@PathVariable int id, RedirectAttributes redirect) {
+    contactService.delete(id);
+    redirect.addFlashAttribute("successMessage", "Deleted contact successfully!");
+    return "redirect:/";
   }
 }

@@ -39,4 +39,6 @@ public class ContactServiceImpl implements ContactService {
   public void delete(Integer id) {
     contactRepository.deleteById(id);
   }
+
+
 }

@@ -31,6 +31,14 @@
         <th:block th:unless="${#lists.isEmpty(contacts)}">
             <div class="table-responsive">
                 <h5>List of contacts</h5>
+                <div class="row mt-4">
+                    <div th:if="${successMessage}" class="alert alert-success alert-dismissible fade show" role="alert">
+                        <span th:text="${successMessage}"></span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
                 <table class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -41,6 +49,7 @@
                         <th>Action</th>
                     </tr>
                     </thead>
+
                     <tbody>
                     <tr th:each="contact,iterStat : ${contacts}">
                         <th scope="row" th:text="${iterStat.count}"></th>
@@ -48,8 +57,12 @@
                         <td th:text="${contact.email}"></td>
                         <td th:text="${contact.phone}"></td>
                         <td>
-                            <a href="#" class="mr-sm-2 text-primary"><i class="fa fa-pencil"></i></a>
-                            <a href="#" class="text-danger"><i class="fa fa-trash"></i></a>
+                            <a href="#" th:href="@{/{id}/edit(id=${contact.id})}" class="mr-sm-2 text-primary">
+                                <i class="fa fa-pencil"></i>
+                            </a>
+                            <a href="#" th:href="@{/{id}/delete(id=${contact.id})}" class="text-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
